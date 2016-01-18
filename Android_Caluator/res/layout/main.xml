@@ -133,7 +133,7 @@
             android:textSize="14dp"
             android:layout_height="wrap_content"/>
         <Button android:id="@+id/sqrt"
-            android:text="sqr"
+            android:text="√"
             android:layout_width="53sp"
             android:textSize="14dp"
             android:layout_height="wrap_content"/>

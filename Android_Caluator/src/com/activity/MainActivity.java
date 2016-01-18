@@ -91,10 +91,58 @@ public class MainActivity extends Activity{
 		c.setOnClickListener(actionPerformed);
 	}
 	
+	String[] Tipcommand=new String[500];
+	int tip_i=0;
 	private OnClickListener actionPerformed=new OnClickListener(){
 		public void onClick(View v){
-			
+			String command=((Button)v).getText().toString();
+			String str=input.getText().toString();
+			if(equals_flag==false&&"0123456789.()sincostanlnlogn!+-*¡Â^¡Ì".indexOf(command)!=-1){
+				if(right(str)){
+					
+				}
+			}
 		}
 	};
 	
+	private void print(String str){
+		if(vbegin){
+			input.setText(str);
+		}else{
+			input.append(str);
+		}
+		vbegin=false;
+	}
+	
+	private boolean right(String str){
+		int i=0;
+		String reg="0123456789.+-*¡Â¡Ì^incotasslg()!*";
+		for(i=0;i<str.length();i++){
+			int se=reg.indexOf(str.charAt(i));
+			if(se==-1){
+				break;
+			}
+		}
+		if(i==str.length()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	private int TTO(String str){
+		if((str.charAt(str.length()-1)=='n'&&str.charAt(str.length()-2)=='i'&&str.charAt(str.length()-3)=='s')
+				||(str.charAt(str.length()-1)=='s'&&str.charAt(str.length()-2)=='o'&&str.charAt(str.length()-3)=='c')
+				||(str.charAt(str.length()-1)=='n'&&str.charAt(str.length()-2)=='a'&&str.charAt(str.length()-3)=='t')
+				||(str.charAt(str.length()-1)=='g'&&str.charAt(str.length()-2)=='o'&&str.charAt(str.length()-3)=='l')){
+					return 3;
+				}
+				else if((str.charAt(str.length()-1)=='n'&&str.charAt(str.length()-2)=='l')
+						||(str.charAt(str.length()-1)=='!'&&str.charAt(str.length()-2)=='n')){
+					return 2;
+				}
+				else{
+					return 1;
+				}
+	}
 }

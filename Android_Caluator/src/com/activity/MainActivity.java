@@ -99,7 +99,7 @@ public class MainActivity extends Activity{
 			String str=input.getText().toString();
 			if(equals_flag==false&&"0123456789.()sincostanlnlogn!+-*¡Â^¡Ì".indexOf(command)!=-1){
 				if(right(str)){
-					
+					if
 				}
 			}
 		}
@@ -145,4 +145,165 @@ public class MainActivity extends Activity{
 					return 1;
 				}
 	}
+	
+	private void TipChecker(String tipcommand1,String tipcommand2){
+		int Tipcode1=0,Tipcode2=0;
+		int tiptype1=0,tiptype2=0;
+		int bracket=0;
+		if(tipcommand1.compareTo("#")==0&&(tipcommand2.compareTo("¡Â")==0||tipcommand2.compareTo("*")==0||tipcommand2.compareTo("+")==0||tipcommand2.compareTo(")")==0||tipcommand2.compareTo("¡Ì")==0
+				||tipcommand2.compareTo("^")==0)){
+			Tipcode1=-1;
+		}
+		
+		else if(tipcommand1.compareTo("#")!=0){
+			if(tipcommand1.compareTo("(")==0){
+				tiptype1=1;
+			}else if(tipcommand1.compareTo(")")==0){
+				tiptype1=2;
+			}else if(tipcommand1.compareTo(".")==0){
+				tiptype1=3;
+			}else if("0123456789".indexOf(tipcommand1)!=-1){
+				tiptype1=4;
+			}else if("+-*¡Â".indexOf(tipcommand1)!=-1){
+				tiptype1=5;
+			}else if("^¡Ì".indexOf(tipcommand1)!=-1){
+				tiptype1=6;
+			}else if("sincostanloglnn!".indexOf(tipcommand1)!=-1){
+				tiptype1=7;
+			}
+			if(tipcommand2.compareTo("(")==0){
+				tiptype2=1;
+			}else if(tipcommand2.compareTo(")")==0){
+				tiptype2=2;
+			}else if(tipcommand2.compareTo(".")==0){
+				tiptype2=3;
+			}else if("0123456789".indexOf(tipcommand2)!=-1){
+				tiptype2=4;
+			}else if("+-*¡Â".indexOf(tipcommand2)!=-1){
+				tiptype2=5;
+			}else if("^¡Ì".indexOf(tipcommand2)!=-1){
+				tiptype2=6;
+			}else if("sincostanloglnn!".indexOf(tipcommand2)!=-1){
+				tiptype2=7;
+			}
+			
+			switch(tiptype1){
+			case 1:
+				if(tiptype2==2||(tiptype2==5&&tipcommand2.compareTo("-")!=0)||tiptype2==6)
+					Tipcode1=1;
+				break;
+			case 2:
+				if(tiptype2==1||tiptype2==3||tiptype2==4||tiptype2==7)
+					Tipcode1=2;
+				break;
+			case 3:
+				if(tiptype2==1||tiptype2==7)
+					Tipcode1=3;
+				if(tiptype2==3)
+					Tipcode1=8;
+				break;
+			case 4:
+				if(tiptype2==1||tiptype2==7)
+					Tipcode1=4;
+				break;
+			case 5:
+				if(tiptype2==2||tiptype2==5||tiptype2==6)
+					Tipcode1=5;
+				break;
+			case 6:
+				if(tiptype2==2||tiptype2==5||tiptype2==6||tiptype2==7)
+					Tipcode1=6;
+				break;
+			case 7:
+				if(tiptype2==2||tiptype2==5||tiptype2==6||tiptype2==7)
+					Tipcode1=7;
+				break;
+			}
+		}
+		
+		if(Tipcode1==0&&tipcommand2.compareTo(".")==0){
+			int tip_point=0;
+			for(int i=0;i<tip_i;i++){
+				if(Tipcommand[i].compareTo(".")==0){
+					tip_point++;
+				}
+				if(Tipcommand[i].compareTo("sin")==0||Tipcommand[i].compareTo("cos")==0||Tipcommand[i].compareTo("tan")==0||Tipcommand[i].compareTo("log")==0||
+						Tipcommand[i].compareTo("ln")==0||Tipcommand[i].compareTo("n!")==0||Tipcommand[i].compareTo("¡Ì")==0||Tipcommand[i].compareTo("^")==0||
+						Tipcommand[i].compareTo("¡Â")==0||Tipcommand[i].compareTo("*")==0||Tipcommand[i].compareTo("-")==0||Tipcommand[i].compareTo("+")==0||
+						Tipcommand[i].compareTo("(")==0||Tipcommand[i].compareTo(")")==0){
+					tip_point=0;
+				}
+			}
+			if(tip_point>1){
+				Tipcode1=8;
+			}
+		}
+		if(Tipcode1==0&&tipcommand2.compareTo(")")==0){
+			int tip_right_bracket=0;
+			for(int i=0;i<tip_i;i++){
+				if(Tipcommand[1].compareTo("(")==0){
+					tip_right_bracket++;
+				}
+				if(Tipcommand[i].compareTo(")")==0){
+					tip_right_bracket--;
+				}
+			}
+			if(tip_right_bracket==0){
+				Tipcode1=10;
+			}
+		}
+		
+		if(Tipcode1==0&&tipcommand2.compareTo("=")==0){
+			int tip_bracket=0;
+			for(int i=0;i<tip_i;i++){
+				if(Tipcommand[i].compareTo("(")==0){
+					tip_bracket++;
+				}
+				if(Tipcommand[i].compareTo(")")==0){
+					tip_bracket--;
+				}
+			}
+			if(tip_bracket>0){
+				Tipcode1=9;
+				bracket=tip_bracket;
+			}else if(tip_bracket==0){
+				if("¡Ì^sincostanloglnn!".indexOf(tipcommand1)!=-1){
+					Tipcode1=6;
+				}
+				if("+-*¡Â".indexOf(tipcommand1)!=-1){
+					Tipcode1=5;
+				}
+			}
+		}
+		
+		if(tipcommand2.compareTo("MC")==0)
+			Tipcode2=1;
+		if(tipcommand2.compareTo("C")==0)
+			Tipcode2=2;
+		if(tipcommand2.compareTo("DRG")==0)
+			Tipcode2=3;
+		if(tipcommand2.compareTo("bk")==0)
+			Tipcode2=4;
+		if(tipcommand2.compareTo("sin")==0)
+			Tipcode2=5;
+		if(tipcommand2.compareTo("cos")==0)
+			Tipcode2=6;
+		if(tipcommand2.compareTo("tan")==0)
+			Tipcode2=7;
+		if(tipcommand2.compareTo("log")==0)
+			Tipcode2=8;
+		if(tipcommand2.compareTo("ln")==0)
+			Tipcode2=9;
+		if(tipcommand2.compareTo("n!")==0)
+			Tipcode2=10;
+		if(tipcommand2.compareTo("¡Ì")==0)
+			Tipcode2=11;
+		if(tipcommand2.compareTo("^")==0)
+			Tipcode2=12;
+		
+		TipShow(bracket,Tipcode1,Tipcode2,tipcommand1,tipcommand2);
+		
+	}
+	
+	
 }

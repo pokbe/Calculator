@@ -99,7 +99,7 @@ public class MainActivity extends Activity{
 			String str=input.getText().toString();
 			if(equals_flag==false&&"0123456789.()sincostanlnlogn!+-*÷^√".indexOf(command)!=-1){
 				if(right(str)){
-					if
+					if("+-*÷^√")
 				}
 			}
 		}
@@ -302,6 +302,113 @@ public class MainActivity extends Activity{
 			Tipcode2=12;
 		
 		TipShow(bracket,Tipcode1,Tipcode2,tipcommand1,tipcommand2);
+		
+	}
+	
+	private void TipShow(int bracket,int tipcode1,int tipcode2,String tipcommand1,String tipcommand2){
+		String tipmessage="";
+		if(tipcode1!=0){
+			tip_lock=false;
+		}
+		switch(tipcode1){
+		case -1:
+			tipmessage=tipcommand2+ " 不能作为第一个算符\n";
+			break;
+		case 1:
+			tipmessage=tipcommand1+ " 后应暑促数字/(/,/-/函数\n";
+			break;
+		case 2:
+			tipmessage=tipcommand1+ " 后应输入：）/算符 \n";
+			break;
+		case 3:
+			tipmessage=tipcommand1+" 后应输入：)/数字、算符\n";
+			break;
+		case 4:
+			tipmessage=tipcommand1+" 后应输入：）/./数字/算符\n";
+			break;
+		case 5:
+			tipmessage=tipcommand1+ " 后应输入：(/./数字/函数 \n";
+			break;
+		case 6:
+			tipmessage=tipcommand1+ " 后应输入：(/./数字 \n";
+			break;
+		case 7:
+			tipmessage=tipcommand1+ " 后应输入： (/./数字 \n";
+			break;
+		case 8:
+			tipmessage="小数点重复\n";
+			break;
+		case 9:
+			tipmessage="不能计算，缺少"+bracket+"个)";
+			break;
+		case 10:
+			tipmessage="不需要 )";
+			break;
+		}
+		switch(tipcode2) {
+        case 1:
+            tipmessage = tipmessage + "[MC 用法: 清除记忆 MEM]";
+            break;
+        case 2:
+            tipmessage = tipmessage + "[C 用法: 归零]";
+            break;
+        case 3:
+            tipmessage = tipmessage + "[DRG 用法: 选择 DEG 或 RAD]";
+            break;
+        case 4:
+            tipmessage = tipmessage + "[Bksp 用法: 退格]";
+            break;
+        case 5:
+            tipmessage = tipmessage + "sin 函数用法示例：\n" +
+                    "DEG：sin30 = 0.5      RAD：sin1 = 0.84\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "sin(cos45)，而不是sincos45" ;
+            break;
+        case 6:
+            tipmessage = tipmessage + "cos 函数用法示例：\n" +
+                    "DEG：cos60 = 0.5      RAD：cos1 = 0.54\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "cos(sin45)，而不是cossin45" ;
+            break;
+        case 7:
+            tipmessage = tipmessage + "tan 函数用法示例：\n" +
+                    "DEG：tan45 = 1      RAD：tan1 = 1.55\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "tan(cos45)，而不是tancos45" ;
+            break;
+        case 8:
+            tipmessage = tipmessage + "log 函数用法示例：\n" +
+                    "log10 = log(5+5) = 1\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "log(tan45)，而不是logtan45" ;
+            break;
+        case 9:
+            tipmessage = tipmessage + "ln 函数用法示例：\n" +
+                    "ln10 = le(5+5) = 2.3   lne = 1\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "ln(tan45)，而不是lntan45" ;
+            break;
+        case 10:
+            tipmessage = tipmessage + "n! 函数用法示例：\n" +
+                    "n!3 = n!(1+2) = 3×2×1 = 6\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "n!(log1000)，而不是n!log1000" ;
+            break;
+        case 11:
+            tipmessage = tipmessage + "√ 用法示例：开任意次根号\n" +
+                    "如：27开3次根为  27√3 = 3\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "(函数)√(函数) ， (n!3)√(log100) = 2.45";
+            break;
+        case 12:
+            tipmessage = tipmessage + "^ 用法示例：开任意次平方\n" +
+                    "如：2的3次方为  2^3 = 8\n" +
+                    "注：与其他函数一起使用时要加括号，如：\n" +
+                    "(函数)√(函数) ， (n!3)^(log100) = 36";
+            break;
+        }
+        //将提示信息显示到tip
+        tip.setText(tipmessage);
 		
 	}
 	

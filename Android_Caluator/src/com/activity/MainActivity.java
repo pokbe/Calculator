@@ -144,8 +144,74 @@ public class MainActivity extends Activity{
 						tip_i=0;
 						tip.setText("欢迎使用！");
 					}
+				}else if(TTO(str)==2){
+					if(str.length()>2)
+						input.setText(str.substring(0,str.length()-2));
+					else if(str.length()==2){
+						input.setText("0");
+						vbegin=true;
+						tip_i=0;
+						tip.setText("欢迎使用！");
+					}
+				}else if(TTO(str)==1){
+					if(right(str)){
+						if(str.length()>1)
+							input.setText(str.substring(0,str.length()-1));
+						else if(str.length()==1){
+							input.setText("0");
+							vbegin=true;
+							tip_i=0;
+							tip.setText("欢迎使用！");
+						}
+					}else{
+						input.setText("0");
+						vbegin=true;
+						tip_i=0;
+						tip.setText("欢迎使用！");
+					}
 				}
+				if(input.getText().toString().compareTo("-")==0||equals_flag==false){
+					input.setText("0");
+					vbegin=true;
+					tip_i=0;
+					tip.setText("欢迎使用！ ");
+				}
+				tip_lock=true;
+				if(tip_i>0)
+					tip_i--;
+			}else if(command.compareTo("Bk")==0&&equals_flag==false){
+				input.setText("0");
+				vbegin=true;
+				tip_i=0;
+				tip_lock=true;
+				tip.setText("欢迎使用！ ");
+			}else if(command.compareTo("C")==0){
+				input.setText("0");
+				vbegin=true;
+				tip_i=0;
+				tip_lock=true;
+				equals_flag=true;
+				tip.setText("欢迎使用！");
+			}else if(command.compareTo("MC")==0){
+				mem.setText("0");
+			}else if(command.compareTo("exit")==0){
+				System.exit(0);
+			}else if(command.compareTo("=")==0&&tip_lock&&right(str)&&equals_flag){
+				tip_i=0;
+				tip_lock=false;
+				equals_flag=false;
+				str_old=str;
+				str=str.replaceAll("sin", "s");
+				str=str.replaceAll("cos", "c");
+				str=str.replaceAll("tan", "t");
+				str=str.replaceAll("log", "g");
+				str=str.replaceAll("ln", "l");
+				str=str.replaceAll("n!", "!");
+				vbegin=true;
+				str_new=str.replaceAll("-", "-1*");
+				new calc().process(str_new);
 			}
+			tip_lock=true;
 		}
 	};
 	

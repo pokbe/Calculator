@@ -99,7 +99,51 @@ public class MainActivity extends Activity{
 			String str=input.getText().toString();
 			if(equals_flag==false&&"0123456789.()sincostanlnlogn!+-*÷^√".indexOf(command)!=-1){
 				if(right(str)){
-					if("+-*÷^√")
+					if("+-*÷^√)".indexOf(command)!=-1){
+						for(int i=0;i<str.length();i++){
+							Tipcommand[tip_i]=String.valueOf(str.charAt(i));
+							tip_i++;
+						}
+						vbegin=false;
+					}
+				}else{
+					input.setText("0");
+					vbegin=true;
+					tip_i=0;
+					tip_lock=true;
+					tip.setText("欢迎使用！");
+				}
+				equals_flag=true;
+			}
+			if(tip_i>0)
+				TipChecker(Tipcommand[tip_i-1],command);
+			else if(tip_i==0){
+				TipChecker("#",command);
+			}
+			if("0123456789.()sincostanlnlogn!+-*÷^√".indexOf(command)!=-1 && tip_lock){
+				Tipcommand[tip_i]=command;
+				tip_i++;
+			}
+			if("0123456789.()sincostanlnlogn!+-*÷^√".indexOf(command)!=-1&& tip_lock){
+				print(command);
+			}else if(command.compareTo("DRG")==0&&tip_lock){
+				if(drg_flag==true){
+					drg_flag=false;
+					_drg.setText(" RAD");
+				}else{
+					drg_flag=true;
+					_drg.setText(" DEG");
+				}
+			}else if(command.compareTo("Bksp")==0&&equals_flag){
+				if(TTO(str)==3){
+					if(str.length()>3)
+						input.setText(str.substring(0,str.length()-3));
+					else if(str.length()==3){
+						input.setText("0");
+						vbegin=true;
+						tip_i=0;
+						tip.setText("欢迎使用！");
+					}
 				}
 			}
 		}
